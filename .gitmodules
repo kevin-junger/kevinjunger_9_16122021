@@ -1,0 +1,6 @@
+[submodule "Billed-app-FR-Back"]
+	path = Billed-app-FR-Back
+	url = ./Billed-app-FR-Back
+[submodule "Billed-app-FR-Front"]
+	path = Billed-app-FR-Front
+	url = ./Billed-app-FR-Front
