@@ -85,6 +85,7 @@ export default class {
   }
 
   handleEditTicket(e, bill, bills) {
+    e.stopImmediatePropagation()
     if (this.counter === undefined || this.id !== bill.id) this.counter = 0
     if (this.id === undefined || this.id !== bill.id) this.id = bill.id
     if (this.counter % 2 === 0) {
@@ -130,6 +131,7 @@ export default class {
   }
 
   handleShowTickets(e, bills, index) {
+    e.stopImmediatePropagation()
     if (this.counter === undefined || this.index !== index) this.counter = 0
     if (this.index === undefined || this.index !== index) this.index = index
     if (this.counter % 2 === 0) {
