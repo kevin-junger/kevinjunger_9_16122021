@@ -70,5 +70,5 @@ Le gros du travail consiste à améliorer et fiabiliser le parcours employé, no
 
 4. C'est prêt !
 
-  - Accès à l'application : `[http://localhost:8080](http://localhost:8080)`
-  - Accès au rapport de couverture : `[http://localhost:8080/coverage/lcov-report](http://localhost:8080/coverage/lcov-report)`
+  - Accès à l'application : `http://localhost:8080`
+  - Accès au rapport de couverture : `http://localhost:8080/coverage/lcov-report`
