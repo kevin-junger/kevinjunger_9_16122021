@@ -1,4 +1,5 @@
 import { screen } from "@testing-library/dom"
+import userEvent from "@testing-library/user-event"
 import { bills } from "../fixtures/bills.js"
 import { ROUTES, ROUTES_PATH } from "../constants/routes.js"
 import Router from "../app/Router.js"
@@ -32,7 +33,8 @@ describe("Given I am connected as an employee", () => {
         document.body.innerHTML = html
         const testBills = new Bills({ document, onNavigate, store: null, localStorage: window.localStorage })
         const eyeIcons = screen.getAllByTestId('icon-eye')
-        eyeIcons[0].addEventListener('click', testBills.handleClickIconEye(eyeIcons[0]))
+        const handleClick = jest.fn(testBills.handleClickIconEye(eyeIcons[0]))
+        eyeIcons[0].addEventListener('click', handleClick)
         userEvent.click(eyeIcons[0])
         expect(handleClickIconEye()).toHaveBeenCalled()
         expect(document.getElementById('modaleFile')).toBeTruthy()
@@ -43,10 +45,11 @@ describe("Given I am connected as an employee", () => {
         const html = BillsUI({ data: [] })
         document.body.innerHTML = html
         const testBills = new Bills({ document, onNavigate, store: null, localStorage: window.localStorage })
-        const newBill = screen.getByTestId('btn-new-bill')
-        newBill.addEventListener('click', testBills.handleClickNewBill())
-        userEvent.click(newBill)
-        expect(handleClickNewBill()).toHaveBeenCalled()
+        const newBillBtn = screen.getByTestId('btn-new-bill')
+        const handleClick = jest.fn(testBills.handleClickNewBill)
+        newBillBtn.addEventListener('click', handleClick)
+        userEvent.click(newBillBtn)
+        expect(handleClick).toHaveBeenCalled()
       })
     })
   })
