@@ -34,8 +34,19 @@ describe("Given I am connected as an employee", () => {
         const eyeIcons = screen.getAllByTestId('icon-eye')
         eyeIcons[0].addEventListener('click', testBills.handleClickIconEye(eyeIcons[0]))
         userEvent.click(eyeIcons[0])
-        expect(handleClickIconEye).toHaveBeenCalled()
+        expect(handleClickIconEye()).toHaveBeenCalled()
         expect(document.getElementById('modaleFile')).toBeTruthy()
+      })
+    })
+    describe("When I click the \"New Bill\" button", () => {
+      test("Then the \"New Bill\" page should render", () => {
+        const html = BillsUI({ data: [] })
+        document.body.innerHTML = html
+        const testBills = new Bills({ document, onNavigate, store: null, localStorage: window.localStorage })
+        const newBill = screen.getByTestId('btn-new-bill')
+        newBill.addEventListener('click', testBills.handleClickNewBill())
+        userEvent.click(newBill)
+        expect(handleClickNewBill()).toHaveBeenCalled()
       })
     })
   })
