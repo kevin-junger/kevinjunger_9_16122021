@@ -42,7 +42,7 @@ export default class NewBill {
         }).catch(error => console.error(error))
     } else {
       window.alert(`Type de fichier incorrect. Sont acceptés les fichiers JPG, JPEG ou PNG.`)
-      fileInput.value = ''
+      fileInput.value = null
     }
   }
   handleSubmit = e => {
