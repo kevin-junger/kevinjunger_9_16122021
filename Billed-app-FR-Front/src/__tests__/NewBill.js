@@ -1,9 +1,8 @@
 import { screen } from "@testing-library/dom"
 import userEvent from "@testing-library/user-event"
-import { ROUTES, ROUTES_PATH } from "../constants/routes.js"
-import Router from "../app/Router.js"
+import { ROUTES } from "../constants/routes.js"
 import store from "../app/Store.js"
-import { localStorageMock } from "../__mocks__/localStorage.js";
+import { localStorageMock } from "../__mocks__/localStorage.js"
 import NewBillUI from "../views/NewBillUI.js"
 import NewBill from "../containers/NewBill.js"
 
@@ -14,13 +13,6 @@ describe("Given I am connected as an employee", () => {
     document.body.innerHTML = ROUTES({ pathname })
   }
   describe("When I am on NewBill Page", () => {
-    test("Then the \"New Bill\" icon shoud be highlighted", () => {
-      window.location.hash = ROUTES_PATH["Bills"]
-      document.body.innerHTML = `<div id="root"></div>`
-      Router()
-      const icon = screen.getByTestId('icon-window')
-      expect(icon.classList.contains('active-icon')).toBeTruthy()
-    })
     test("Then a form should appear", () => {
       const html = NewBillUI()
       document.body.innerHTML = html
