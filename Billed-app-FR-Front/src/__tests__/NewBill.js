@@ -2,7 +2,7 @@ import { screen } from "@testing-library/dom"
 import userEvent from "@testing-library/user-event"
 import { ROUTES, ROUTES_PATH } from "../constants/routes.js"
 import Router from "../app/Router.js"
-import * as storeMock from "../__mocks__/store.js"
+import store from "../app/Store.js"
 import { localStorageMock } from "../__mocks__/localStorage.js";
 import NewBillUI from "../views/NewBillUI.js"
 import NewBill from "../containers/NewBill.js"
@@ -32,7 +32,7 @@ describe("Given I am connected as an employee", () => {
         test("Then the file should be rejected", () => {
           const html = NewBillUI()
           document.body.innerHTML = html
-          const newBill = new NewBill({ document, onNavigate, store: storeMock, localStorage: window.localStorage })
+          const newBill = new NewBill({ document, onNavigate, store: store, localStorage: window.localStorage })
           const handleChangeFile = jest.fn(newBill.handleChangeFile)
           const inputFile = screen.getByTestId('file')
           const file = new File(['some random data'], 'file.pdf', {type: 'application/pdf'})
@@ -46,7 +46,7 @@ describe("Given I am connected as an employee", () => {
         test("Then the file should be accepted", () => {
           const html = NewBillUI()
           document.body.innerHTML = html
-          const newBill = new NewBill({ document, onNavigate, store: storeMock, localStorage: window.localStorage })
+          const newBill = new NewBill({ document, onNavigate, store: store, localStorage: window.localStorage })
           const handleChangeFile = jest.fn(newBill.handleChangeFile)
           const inputFile = screen.getByTestId('file')
           const file = new File(['some random data'], 'file.jpg', {type: 'image/jpg'})
