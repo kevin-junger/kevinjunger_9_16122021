@@ -49,7 +49,6 @@ Le gros du travail consiste à améliorer et fiabiliser le parcours employé, no
   ```bash
   ~$ cd Billed-app-FR-Front/
   ~$ npm i -D
-  ~$ npm i -D live-server
   ```
 
 3. Exécuter le tout
