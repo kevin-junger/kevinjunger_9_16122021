@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/dom"
+import { fireEvent, screen } from "@testing-library/dom"
 import userEvent from "@testing-library/user-event"
 import { ROUTES } from "../constants/routes.js"
 import store from "../app/Store.js"
@@ -47,6 +47,17 @@ describe('Given I am connected as an employee', () => {
           expect(handleChangeFile).toBeCalled()
           expect(inputFile.files.length).toEqual(1)
         })
+      })
+    })
+    describe('When I submit a NewBill', () => {
+      test('Then I should be redirected to the Bills page', () => {
+        document.body.innerHTML = NewBillUI()
+        const newBill = new NewBill({ document, onNavigate, store: null, localStorage: window.localStorage })
+        const form = screen.getByTestId('form-new-bill')
+        const handleSubmit = jest.fn(newBill.handleSubmit)
+        form.addEventListener('submit', handleSubmit)
+        fireEvent.submit(form)
+        expect(screen.getByText('Mes notes de frais')).toBeTruthy()
       })
     })
   })
