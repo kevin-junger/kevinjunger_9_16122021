@@ -88,7 +88,7 @@ describe('Given I am connected as an employee', () => {
       const postBill = await storeMock.post(dataBill)
       expect(postSpy).toHaveBeenCalled()
       expect(postSpy).toReturn()
-      expect(postBill.id).toBeTruthy()
+      expect(postBill.id).toBeTruthy() // revoir condition de validation
     })
   })
 })
