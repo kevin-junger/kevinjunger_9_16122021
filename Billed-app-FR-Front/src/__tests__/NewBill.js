@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event"
 import { ROUTES } from "../constants/routes.js"
 import store from "../app/Store.js"
 import { localStorageMock } from "../__mocks__/localStorage.js"
+import storeMock from "../__mocks__/store.js"
 import NewBillUI from "../views/NewBillUI.js"
 import NewBill from "../containers/NewBill.js"
 
@@ -59,6 +60,35 @@ describe('Given I am connected as an employee', () => {
         fireEvent.submit(form)
         expect(screen.getByText('Mes notes de frais')).toBeTruthy()
       })
+    })
+  })
+})
+
+// test d'intégration POST
+describe('Given I am connected as an employee', () => {
+  Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+  window.localStorage.setItem('user', JSON.stringify({ type: 'Employee' }))
+  describe('When I send a NewBill form', () => {
+    test('Then fetches bill ID from mock API POST', async () => {
+      const dataBill = {
+        "vat": "80",
+        "fileUrl": "https://test.storage.tld/v0/b/billable-677b6.a…f-1.jpg?alt=media&token=c1640e12-a24b-4b11-ae52-529112e9602a",
+        "status": "pending",
+        "type": "Hôtel et logement",
+        "commentary": "séminaire billed",
+        "name": "encore",
+        "fileName": "preview-facture-free-201801-pdf-1.jpg",
+        "date": "2004-04-04",
+        "amount": 400,
+        "commentAdmin": "ok",
+        "email": "a@a",
+        "pct": 20
+      }
+      const postSpy = jest.spyOn(storeMock, "post")
+      const postBill = await storeMock.post(dataBill)
+      expect(postSpy).toHaveBeenCalled()
+      expect(postSpy).toReturn()
+      expect(postBill.id).toBeTruthy()
     })
   })
 })
