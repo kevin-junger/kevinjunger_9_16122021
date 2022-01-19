@@ -68,7 +68,7 @@ describe('Given I am connected as an employee', () => {
 // test d'intégration POST
 describe('Given I am connected as an employee', () => {
   Object.defineProperty(window, 'localStorage', { value: localStorageMock })
-  window.localStorage.setItem('user', JSON.stringify({ type: 'Employee', email: 'a@a' }))
+  window.localStorage.setItem('user', JSON.stringify({ type: 'Employee' }))
   describe('When I send a NewBill form', () => {
     test('Then fetches bill ID from mock API POST', async () => {
       const dataBill = {
