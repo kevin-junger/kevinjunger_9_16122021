@@ -29,6 +29,7 @@ describe('Given I am connected as an employee', () => {
           const handleChangeFile = jest.fn(newBill.handleChangeFile)
           const inputFile = screen.getByTestId('file')
           const file = new File(['some random data'], 'file.pdf', { type: 'application/pdf' })
+          jest.spyOn(window, 'alert').mockImplementation(() => {})
           inputFile.addEventListener('change', handleChangeFile)
           userEvent.upload(inputFile, file)
           expect(handleChangeFile).toBeCalled()
@@ -42,7 +43,7 @@ describe('Given I am connected as an employee', () => {
           const newBill = new NewBill({ document, onNavigate, store: store, localStorage: window.localStorage })
           const handleChangeFile = jest.fn(newBill.handleChangeFile)
           const inputFile = screen.getByTestId('file')
-          const file = new File(['some random data'], 'file.jpg', {type: 'image/jpg'})
+          const file = new File(['some random data'], 'file.jpg', { type: 'image/jpg'})
           inputFile.addEventListener('change', handleChangeFile)
           userEvent.upload(inputFile, file)
           expect(handleChangeFile).toBeCalled()
@@ -67,10 +68,11 @@ describe('Given I am connected as an employee', () => {
 // test d'intégration POST
 describe('Given I am connected as an employee', () => {
   Object.defineProperty(window, 'localStorage', { value: localStorageMock })
-  window.localStorage.setItem('user', JSON.stringify({ type: 'Employee' }))
+  window.localStorage.setItem('user', JSON.stringify({ type: 'Employee', email: 'a@a' }))
   describe('When I send a NewBill form', () => {
     test('Then fetches bill ID from mock API POST', async () => {
       const dataBill = {
+        "id": "47qAXb6fIm2zOKkLzMro",
         "vat": "80",
         "fileUrl": "https://test.storage.tld/v0/b/billable-677b6.a…f-1.jpg?alt=media&token=c1640e12-a24b-4b11-ae52-529112e9602a",
         "status": "pending",
@@ -88,7 +90,7 @@ describe('Given I am connected as an employee', () => {
       const postBill = await storeMock.post(dataBill)
       expect(postSpy).toHaveBeenCalled()
       expect(postSpy).toReturn()
-      expect(postBill.id).toBeTruthy() // revoir condition de validation
+      expect(postBill.id).toEqual(dataBill.id)
     })
   })
 })
