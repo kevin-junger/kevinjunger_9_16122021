@@ -8,6 +8,7 @@ import NewBillUI from "../views/NewBillUI.js"
 import NewBill from "../containers/NewBill.js"
 
 describe('Given I am connected as an employee', () => {
+  // mock d'une connexion en tant qu'employé
   Object.defineProperty(window, 'localStorage', { value: localStorageMock })
   window.localStorage.setItem('user', JSON.stringify({ type: 'Employee' }))
   const onNavigate = (pathname) => {
@@ -29,7 +30,7 @@ describe('Given I am connected as an employee', () => {
           const handleChangeFile = jest.fn(newBill.handleChangeFile)
           const inputFile = screen.getByTestId('file')
           const file = new File(['some random data'], 'file.pdf', { type: 'application/pdf' })
-          jest.spyOn(window, 'alert').mockImplementation(() => {})
+          jest.spyOn(window, 'alert').mockImplementation(() => {}) // nécessaire sinon renvoie une erreur
           inputFile.addEventListener('change', handleChangeFile)
           userEvent.upload(inputFile, file)
           expect(handleChangeFile).toBeCalled()
@@ -67,7 +68,7 @@ describe('Given I am connected as an employee', () => {
 
 // test d'intégration POST
 describe('Given I am connected as an employee', () => {
-  Object.defineProperty(window, 'localStorage', { value: localStorageMock })
+  // mock d'une connexion en tant qu'employé
   window.localStorage.setItem('user', JSON.stringify({ type: 'Employee' }))
   describe('When I send a NewBill form', () => {
     test('Then fetches bill ID from mock API POST', async () => {

@@ -8,6 +8,7 @@ import Bills from "../containers/Bills.js"
 import BillsUI from "../views/BillsUI.js"
 
 describe('Given I am connected as an employee', () => {
+  // mock d'une connexion en tant qu'employé
   window.localStorage.setItem('user', JSON.stringify({ type: 'Employee' }))
   const onNavigate = (pathname) => {
     document.body.innerHTML = ROUTES({ pathname })
@@ -34,7 +35,7 @@ describe('Given I am connected as an employee', () => {
         document.body.innerHTML = html
         const testBills = new Bills({ document, onNavigate, store: null, localStorage: window.localStorage })
         const eyeIcons = screen.getAllByTestId('icon-eye')
-        $.fn.modal = jest.fn()
+        $.fn.modal = jest.fn() // nécessaire sinon renvoie une erreur
         const handleClick = jest.fn(testBills.handleClickIconEye(eyeIcons[0]))
         eyeIcons[0].addEventListener('click', handleClick)
         userEvent.click(eyeIcons[0])
