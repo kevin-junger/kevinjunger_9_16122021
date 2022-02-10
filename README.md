@@ -35,7 +35,7 @@ Le gros du travail consiste à améliorer et fiabiliser le parcours employé, no
 > Les exemples en ligne de commande fournis ici s'appliquent en priorité aux systèmes UNIX (notamment macOS ou les distributions Linux). Pour Windows, la syntaxe peut varier (alternativement, je vous conseille plutôt d'utiliser le [Sous-système Windows pour Linux](https://docs.microsoft.com/fr-fr/windows/wsl/install))
 
 1. Cloner le projet
-2. Pour le back-end comme pour le front-end, il convient d'installer en premier lieu les dépendances npm
+2. Pour le back-end comme pour le front-end, il convient d'installer en premier lieu les dépendances npm :
 
   - Back-end
 
@@ -51,7 +51,7 @@ Le gros du travail consiste à améliorer et fiabiliser le parcours employé, no
   ~$ npm i -D
   ```
 
-3. Exécuter le tout
+3. Exécuter le tout :
 
   - Back-end
 
